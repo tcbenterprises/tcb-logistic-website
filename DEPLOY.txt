@@ -1,0 +1,5 @@
+1. Create GitHub repo
+2. Upload index.html
+3. Settings > Pages > main/root > Save
+4. Live!
+Admin password: TCB2024!
