@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TCB Logistic Enterprises, LLC — CDL driver opportunities, mobile DOT testing and recruiter opportunities.">
+  <title>TCB Logistic Enterprises, LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --purple:#7A3DB8;
+      --purple-dark:#5A2D8A;
+      --purple-light:#8B4CC4;
+      --gold:#D4AF37;
+      --gold-dark:#7A5A00;
+      --ink:#0F0F0F;
+      --cream:#FAF7F2;
+      --white:#fff;
+      --muted:rgba(15,15,15,.62);
+      --line:rgba(15,15,15,.08);
+      --shadow:0 12px 45px rgba(0,0,0,.07);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:var(--cream);
+      font-family:"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    body.modal-open{overflow:hidden}
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .serif{font-family:"Instrument Serif",Georgia,serif}
+    .container{width:min(1280px,calc(100% - 40px));margin:auto}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(15,15,15,.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:#fff;
+    }
+    .nav{
+      min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand-mark{
+      width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--purple),var(--purple-dark));
+      color:var(--gold);font-size:17px;box-shadow:0 8px 25px rgba(122,61,184,.3);
+    }
+    .brand small{display:block;color:rgba(255,255,255,.55);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
+    .nav-links{display:flex;align-items:center;gap:6px}
+    .nav-links a,.admin-btn{
+      border:0;background:transparent;color:rgba(255,255,255,.78);
+      padding:10px 13px;border-radius:999px;font-size:12px;font-weight:700;
+      transition:.2s;
+    }
+    .nav-links a:hover,.admin-btn:hover{background:rgba(255,255,255,.09);color:#fff}
+    .admin-btn{color:var(--gold);border:1px solid rgba(212,175,55,.25)}
+    .mobile-menu{display:none;background:none;border:0;color:#fff;font-size:24px}
+
+    /* Hero */
+    .hero{
+      position:relative;overflow:hidden;background:var(--ink);color:#fff;
+      min-height:650px;display:grid;place-items:center;
+    }
+    .hero:before,.hero:after{
+      content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
+    }
+    .hero:before{width:430px;height:430px;background:rgba(122,61,184,.28);left:-100px;top:-100px}
+    .hero:after{width:360px;height:360px;background:rgba(212,175,55,.12);right:-80px;bottom:-120px}
+    .hero-inner{position:relative;z-index:2;padding:90px 0}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;
+      background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.25);
+      color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    }
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+    h1{font-size:clamp(48px,7vw,86px);line-height:.9;letter-spacing:-.03em;margin:22px 0 22px;max-width:900px}
+    .hero-copy{max-width:720px;color:rgba(255,255,255,.7);font-size:16px;line-height:1.75}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{
+      min-height:48px;padding:0 21px;border-radius:999px;border:1px solid transparent;
+      display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;
+      text-transform:uppercase;letter-spacing:.05em;transition:.2s;
+    }
+    .btn-primary{background:var(--gold);color:#111}
+    .btn-primary:hover{background:#E5C158;transform:translateY(-1px)}
+    .btn-purple{background:var(--purple);color:#fff}
+    .btn-purple:hover{background:var(--purple-light)}
+    .btn-dark{background:var(--ink);color:#fff}
+    .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.2)}
+    .btn-outline:hover{background:rgba(255,255,255,.08)}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:55px;max-width:850px}
+    .stat{padding:18px 20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:18px}
+    .stat strong{display:block;font-size:18px}.stat span{display:block;color:rgba(255,255,255,.48);font-size:11px;margin-top:4px}
+
+    /* Sections */
+    section{padding:90px 0}
+    .section-head{max-width:780px}
+    .kicker{
+      display:inline-flex;padding:7px 12px;border-radius:999px;background:rgba(15,15,15,.05);
+      border:1px solid var(--line);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(15,15,15,.6)
+    }
+    .kicker.dark{background:var(--ink);color:var(--gold);border-color:transparent}
+    h2{font-size:clamp(38px,5vw,56px);line-height:.95;letter-spacing:-.03em;margin:17px 0 13px}
+    .section-head p{margin:0;color:var(--muted);line-height:1.7;font-size:15px}
+
+    /* Jobs */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:34px 0 22px}
+    .tab{
+      border:1px solid var(--line);background:#fff;color:rgba(15,15,15,.62);
+      padding:10px 15px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;
+    }
+    .tab.active{background:var(--purple);border-color:var(--purple);color:#fff}
+    .jobs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .job-card{
+      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+      padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:390px;
+    }
+    .job-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .badge{display:inline-flex;padding:7px 10px;border-radius:999px;background:var(--purple);color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .job-card h3{font-size:20px;line-height:1.15;margin:17px 0 8px}
+    .company{font-size:12px;font-weight:700;color:var(--purple)}
+    .job-meta{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0}
+    .pill{padding:7px 10px;border-radius:999px;background:rgba(212,175,55,.14);color:var(--gold-dark);font-size:10px;font-weight:800}
+    .pill.gray{background:rgba(15,15,15,.045);color:rgba(15,15,15,.65)}
+    .job-desc{color:var(--muted);font-size:12px;line-height:1.65;margin:4px 0 16px}
+    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+    .chip{font-size:10px;padding:6px 8px;border-radius:999px;background:rgba(15,15,15,.045)}
+    .job-actions{display:flex;gap:8px;margin-top:18px}
+    .job-actions .btn{flex:1;min-height:42px;padding:0 10px;font-size:10px}
+
+    /* Testing */
+    .dark-section{background:var(--ink);color:#fff}
+    .dark-section .section-head p{color:rgba(255,255,255,.58)}
+    .testing-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:38px}
+    .dark-card,.light-card{border-radius:var(--radius);padding:30px}
+    .dark-card{background:linear-gradient(135deg,#1a1a1a,#0d0d0d);border:1px solid rgba(255,255,255,.1)}
+    .light-card{background:#fff;color:var(--ink)}
+    .service-list{display:grid;gap:11px;margin-top:22px}
+    .service{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:16px}
+    .service-icon{width:30px;height:30px;border-radius:10px;background:rgba(212,175,55,.14);color:var(--gold);display:grid;place-items:center;flex:0 0 auto}
+    .service strong{font-size:13px}.service span{display:block;color:rgba(255,255,255,.48);font-size:11px;margin-top:3px;line-height:1.5}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(15,15,15,.52);margin-bottom:6px}
+    input,select,textarea{
+      width:100%;border:1px solid var(--line);background:var(--cream);color:var(--ink);
+      border-radius:15px;padding:12px 14px;outline:none;font-size:13px;
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--purple)}
+    textarea{min-height:110px;resize:vertical}
+    .full{grid-column:1/-1}
+    .form-note{font-size:10px;color:rgba(15,15,15,.45);text-align:center;margin-top:12px}
+
+    /* Recruiter */
+    .recruit-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;margin-top:38px}
+    .recruit-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+    .recruit-dark{background:var(--ink);color:#fff;border:1px solid rgba(255,255,255,.1)}
+    .recruit-card h3{font-size:28px;margin:18px 0 8px}
+    .recruit-card p{font-size:13px;line-height:1.7;color:var(--muted)}
+    .recruit-dark p{color:rgba(255,255,255,.62)}
+    .bullets{margin:20px 0;padding:0;list-style:none;display:grid;gap:10px}
+    .bullets li{font-size:12px;color:rgba(15,15,15,.7)}.recruit-dark .bullets li{color:rgba(255,255,255,.7)}
+    .bullets li:before{content:"✓";color:var(--purple);font-weight:800;margin-right:8px}
+    .recruit-dark .bullets li:before{color:var(--gold)}
+    .important{margin:20px 0;padding:15px;border-radius:17px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.2)}
+    .important strong{display:block;color:var(--gold);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+    .important span{display:block;color:rgba(255,255,255,.78);font-size:12px;line-height:1.6;margin-top:4px}
+
+    /* About/contact */
+    .about{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:start}
+    .quote{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+    .quote .serif{font-size:30px;line-height:1.05}
+    .quote p{color:var(--muted);font-size:12px;line-height:1.7;margin:18px 0 0}
+    .contact-box{background:var(--ink);color:#fff;border-radius:var(--radius);padding:30px}
+    .contact-box h3{font-size:25px;margin:0 0 22px}
+    .contact-item{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+    .contact-item:last-child{border-bottom:0}
+    .contact-item span{display:block;color:rgba(255,255,255,.4);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+    .contact-item strong{display:block;margin-top:5px;font-size:13px}
+    .office-list{display:grid;gap:7px;color:rgba(255,255,255,.7);font-size:12px;line-height:1.5;margin-top:8px}
+
+    footer{background:#080808;color:rgba(255,255,255,.5);padding:28px 0;font-size:10px}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-inner strong{color:#fff}
+
+    /* Modal */
+    .modal-backdrop{
+      display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;
+      padding:20px;overflow:auto;align-items:center;justify-content:center;
+    }
+    .modal-backdrop.open{display:flex}
+    .modal{
+      width:min(760px,100%);background:#fff;border-radius:28px;padding:28px;
+      box-shadow:0 30px 100px rgba(0,0,0,.45);position:relative;max-height:92vh;overflow:auto;
+    }
+    .modal-close{position:absolute;right:18px;top:18px;border:0;background:rgba(15,15,15,.06);width:36px;height:36px;border-radius:50%;font-size:18px}
+    .modal h3{font-size:28px;margin:0 40px 8px 0}
+    .modal-sub{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:22px}
+    .modal-actions{display:flex;gap:10px;margin-top:20px}
+    .modal-actions .btn{flex:1}
+
+    /* Admin */
+    .admin-panel{display:none;background:#111;color:#fff;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .admin-panel.show{display:block}
+    .admin-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+    .admin-inner strong{font-size:13px}.admin-inner span{font-size:11px;color:rgba(255,255,255,.5)}
+    .admin-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .admin-actions button{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:9px 13px;font-size:10px;font-weight:800;text-transform:uppercase}
+    .admin-actions button:hover{background:rgba(255,255,255,.12)}
+    .admin-table{margin-top:20px;overflow:auto}
+    table{width:100%;border-collapse:collapse;font-size:11px;min-width:700px}
+    th,td{text-align:left;padding:11px;border-bottom:1px solid rgba(255,255,255,.08)}
+    th{color:var(--gold);font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+
+    .toast{
+      position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);
+      z-index:3000;background:#0f0f0f;color:#fff;border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;padding:12px 18px;font-size:11px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:1000px){
+      .jobs-grid{grid-template-columns:repeat(2,1fr)}
+      .testing-grid,.recruit-grid,.about-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:760px){
+      .container{width:min(100% - 28px,1280px)}
+      .nav{min-height:68px}.nav-links{display:none;position:absolute;left:14px;right:14px;top:62px;background:#111;border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:18px;flex-direction:column;align-items:stretch}
+      .nav-links.open{display:flex}.nav-links a,.admin-btn{text-align:left}
+      .mobile-menu{display:block}
+      .hero{min-height:auto}.hero-inner{padding:70px 0}.hero-stats{grid-template-columns:1fr}
+      section{padding:65px 0}
+      .jobs-grid{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}.full{grid-column:auto}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+      .modal-actions{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <span class="brand-mark">TCB</span>
+      <span>TCB Logistic Enterprises<small>CDL • Testing • Opportunities</small></span>
+    </a>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#jobs">CDL Jobs</a>
+      <a href="#testing">Specimen Collection</a>
+      <a href="#recruiter">Recruiter Opportunities</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button class="admin-btn" id="adminOpen">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<div class="admin-panel" id="adminPanel">
+  <div class="container admin-inner">
+    <div><strong>Admin Dashboard</strong><br><span>Jobs and private appointment records are stored locally in this browser.</span></div>
+    <div class="admin-actions">
+      <button id="addJobBtn">+ Add Job</button>
+      <button id="resetJobsBtn">Reset Jobs</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+  <div class="container admin-table" id="adminTable"></div>
+</div>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="eyebrow"><span class="dot"></span> TCB Logistic Enterprises, LLC</div>
+      <h1 class="serif">Safety, opportunity, and a better road ahead.</h1>
+      <p class="hero-copy">
+        CDL driver opportunities, mobile DOT and non-DOT specimen collection, and flexible recruiter opportunities — built around clear communication, compliance, and real opportunities.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#jobs">Find CDL Jobs</a>
+        <a class="btn btn-purple" href="#testing">Book Collection</a>
+        <a class="btn btn-outline" href="#recruiter">Become a Recruiter</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>CDL Opportunities</strong><span>Local • Regional • OTR • Owner Operator</span></div>
+        <div class="stat"><strong>Mobile Testing</strong><span>DFW • Memphis • Tupelo service areas</span></div>
+        <div class="stat"><strong>Recruiter Path</strong><span>Remote • Commission • Training included</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jobs">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Division 01 • Driver Opportunities</span>
+        <h2 class="serif">CDL Driver Jobs</h2>
+        <p>Browse current opportunity boxes by category. Job cards can be updated from the Admin Dashboard.</p>
+      </div>
+      <div class="tabs" id="jobTabs"></div>
+      <div class="jobs-grid" id="jobsGrid"></div>
+    </div>
+  </section>
+
+  <section class="dark-section" id="testing">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1);color:var(--gold)">Division 02 • Compliance</span>
+        <h2 class="serif">Mobile Specimen Collection</h2>
+        <p>DOT and non-DOT collection support with confidential handling and compliance-focused service.</p>
+      </div>
+
+      <div class="testing-grid">
+        <div class="dark-card">
+          <div class="eyebrow">Certified • 49 CFR Part 40</div>
+          <h3 class="serif" style="font-size:38px;line-height:.95;margin:20px 0 10px">Testing that comes to you.</h3>
+          <p style="color:rgba(255,255,255,.58);font-size:13px;line-height:1.7">
+            Mobile collection service for DFW Metroplex, Memphis, TN surrounding areas, and Tupelo, MS surrounding areas.
+          </p>
+          <div class="service-list">
+            <div class="service"><div class="service-icon">✓</div><div><strong>DOT Drug Testing</strong><span>Urine specimen collection under 49 CFR Part 40.</span></div></div>
+            <div class="service"><div class="service-icon">✓</div><div><strong>DOT Breath Alcohol</strong><span>Breath alcohol technician services.</span></div></div>
+            <div class="service"><div class="service-icon">✓</div><div><strong>Non-DOT Testing</strong><span>Flexible collection options for employers and individuals.</span></div></div>
+            <div class="service"><div class="service-icon">✓</div><div><strong>Consortium / Random Programs</strong><span>Enrollment and ongoing program support.</span></div></div>
+          </div>
+        </div>
+
+        <div class="light-card">
+          <h3 style="margin:0 0 8px;font-size:24px">Book a Collection</h3>
+          <p style="margin:0;color:var(--muted);font-size:12px;line-height:1.6">
+            Submit a private appointment request. Appointment records are stored locally for admin use and are not published as a public list.
+          </p>
+          <form id="bookingForm" style="margin-top:22px">
+            <div class="form-grid">
+              <div><label>Full Name *</label><input id="bookName" required placeholder="John Doe"></div>
+              <div><label>Phone *</label><input id="bookPhone" required placeholder="214-000-0000"></div>
+              <div class="full"><label>Email *</label><input id="bookEmail" type="email" required placeholder="you@company.com"></div>
+              <div class="full"><label>Test Type</label>
+                <select id="bookTest">
+                  <option>DOT Drug Test - Urine (49 CFR Part 40)</option>
+                  <option>DOT Breath Alcohol (BAT)</option>
+                  <option>Non-DOT Drug Test</option>
+                  <option>Consortium Enrollment / Random Program</option>
+                  <option>Return-to-Duty / Follow-up</option>
+                </select>
+              </div>
+              <div><label>Date *</label><input id="bookDate" type="date" required></div>
+              <div><label>Time</label><input id="bookTime" type="time"></div>
+            </div>
+            <button class="btn btn-dark" style="width:100%;margin-top:18px">Confirm Booking</button>
+            <div class="form-note">49 CFR Part 40 • Confidential MRO • FMCSA Clearinghouse</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recruiter">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Division 03 • Build With Us</span>
+        <h2 class="serif">Recruiter Opportunities</h2>
+        <p>One focused path: help CDL drivers land honest jobs. Remote, commission-based, with training and tools provided.</p>
+      </div>
+
+      <div class="recruit-grid">
+        <div class="recruit-card">
+          <span class="badge">Remote • Commission</span>
+          <h3>CDL Driver Recruiter</h3>
+          <div class="job-meta">
+            <span class="pill">$300 - $2000 per placement</span>
+            <span class="pill gray">Remote • Flexible</span>
+          </div>
+          <p>Recruit CDL drivers for vetted carriers. Scripts, job boards, applicant tracking, training, and support are provided.</p>
+          <ul class="bullets">
+            <li>No fleet cold calling — drivers come through applicant channels.</li>
+            <li>1099 commission-based opportunity.</li>
+            <li>Training videos, scripts, templates, and tracking tools provided.</li>
+          </ul>
+          <button class="btn btn-dark" style="width:100%" id="recruiterDetailsBtn">View Details</button>
+        </div>
+
+        <div class="recruit-card recruit-dark">
+          <span class="eyebrow">Ready to Get Started?</span>
+          <h3 class="serif" style="font-size:32px">Access training and complete your onboarding.</h3>
+          <div class="important">
+            <strong>Important</strong>
+            <span>On the IC paperwork, select <b>‘Latarsha Young’</b> as your Team Leader.</span>
+          </div>
+          <div style="display:grid;gap:10px">
+            <a class="btn btn-primary" href="https://www.raider-recruiting.com/" target="_blank" rel="noopener">Access Training & Paperwork</a>
+            <a class="btn btn-purple" href="https://www.raider-recruiting.com/" target="_blank" rel="noopener">Open Training Portal</a>
+          </div>
+          <p style="font-size:10px;text-align:center;margin-top:12px">Training link is set to the Raider Recruiting site. Add your private authentication link only if you intentionally want it exposed publicly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div>
+        <span class="kicker dark">About Us</span>
+        <h2 class="serif">About TCB Logistic<br>Enterprises, LLC</h2>
+        <div class="quote">
+          <div class="serif">“Compliance is safety.<br>Recruitment is opportunity.”</div>
+          <p>
+            TCB Logistic Enterprises connects drivers with opportunities while providing compliance-focused mobile testing services and a professional pathway for independent recruiter partners.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-box" id="contact">
+        <h3>Let's keep you compliant and rolling.</h3>
+        <div class="contact-item">
+          <span>Phone</span>
+          <strong><a href="tel:2144761539">214-476-1539</a></strong>
+        </div>
+        <div class="contact-item">
+          <span>Email</span>
+          <strong><a href="mailto:admin@tcblogisticenterprises.com">admin@tcblogisticenterprises.com</a></strong>
+        </div>
+        <div class="contact-item">
+          <span>Offices / Service Areas</span>
+          <div class="office-list">
+            <div>• DFW Metroplex, TX</div>
+            <div>• Memphis, TN surrounding areas</div>
+            <div>• Tupelo, MS surrounding areas</div>
+            <div>• Plano, TX — Mailing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div><strong>TCB Logistic Enterprises, LLC</strong> — CDL • Testing • Opportunities</div>
+    <div>© <span id="year"></span> TCB Logistic Enterprises, LLC</div>
+  </div>
+</footer>
+
+<!-- Job Details / Job Editor -->
+<div class="modal-backdrop" id="jobModal">
+  <div class="modal">
+    <button class="modal-close" data-close="jobModal">×</button>
+    <div id="jobModalContent"></div>
+  </div>
+</div>
+
+<!-- Recruiter Details -->
+<div class="modal-backdrop" id="recruiterModal">
+  <div class="modal">
+    <button class="modal-close" data-close="recruiterModal">×</button>
+    <h3>CDL Driver Recruiter</h3>
+    <div class="modal-sub">Remote • Commission • Independent Contractor</div>
+    <ul class="bullets">
+      <li>Recruit CDL-A drivers for available carrier opportunities.</li>
+      <li>Use provided scripts, job boards, applicant tracking, and templates.</li>
+      <li>Work remotely using a phone and approved systems.</li>
+      <li>Compensation is commission-based; this is a 1099 independent-contractor opportunity.</li>
+    </ul>
+    <div class="important" style="background:rgba(122,61,184,.08);border-color:rgba(122,61,184,.18)">
+      <strong style="color:var(--purple)">Next Step</strong>
+      <span style="color:rgba(15,15,15,.72)">Complete the training and onboarding process, then follow the instructions provided for platform access.</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-dark" data-close="recruiterModal">Close</button>
+      <a class="btn btn-primary" href="https://www.raider-recruiting.com/" target="_blank" rel="noopener">Access Training</a>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Login -->
+<div class="modal-backdrop" id="adminLoginModal">
+  <div class="modal" style="max-width:440px">
+    <button class="modal-close" data-close="adminLoginModal">×</button>
+    <h3>Admin Access</h3>
+    <div class="modal-sub">Admin mode lets you add, edit, and delete job boxes and view private appointment records stored in this browser.</div>
+    <label>Password</label>
+    <input id="adminPassword" type="password" placeholder="Password" autocomplete="current-password">
+    <div class="modal-actions">
+      <button class="btn btn-outline" style="color:#111;border-color:var(--line)" data-close="adminLoginModal">Cancel</button>
+      <button class="btn btn-dark" id="unlockBtn">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  "use strict";
+
+  const ADMIN_PASSWORD = "TCB2024!";
+  const STORAGE_JOBS = "tcb_cdl_jobs";
+  const STORAGE_APPOINTMENTS = "tcb_appointments";
+
+  const defaultJobs = [
+    {id:"local-1",category:"Local",title:"Local CDL-A Delivery Driver",company:"DFW Regional Fleet",location:"Dallas, TX • Home Daily",pay:"$1,400 - $1,800 / week",type:"Local • Home Daily",description:"Home daily routes delivering general freight within 150-mile radius of DFW. No touch freight, modern equipment.",requirements:["CDL-A, 1yr exp","Clean MVR","Able to work M-F"],benefits:["Health + Dental","OT after 40","New Cascadias"]},
+    {id:"local-2",category:"Local",title:"Local Tanker Driver - HazMat",company:"Metro Fuel Transport",location:"Plano, TX • Home Daily",pay:"$28 - $32 / hr",type:"Local • Tanker",description:"Local fuel delivery. Must have HazMat + Tanker endorsements. Day shift available.",requirements:["CDL-A + HazMat/Tanker","TWIC preferred"],benefits:["Weekly pay","Safety bonus"]},
+    {id:"regional-1",category:"Regional",title:"Regional CDL-A - Southeast Lanes",company:"TCB Partner Carrier",location:"Memphis, TN • Home Weekly",pay:"$1,600 - $2,100 / week",type:"Regional • Home Weekly",description:"Run TN, MS, AL, AR, TX. 5 days out, 2 days home. Drop & hook 80%.",requirements:["CDL-A 6mo min","No SAP drivers"],benefits:["Detention paid","Rider program"]},
+    {id:"regional-2",category:"Regional",title:"Regional Dedicated - Tupelo",company:"Furniture Direct Dedicated",location:"Tupelo, MS • Home Weekly",pay:"$1,550 - $1,950 / week",type:"Regional • Dedicated",description:"Dedicated account out of Tupelo to TX and back. Consistent miles, no weekends forced.",requirements:["CDL-A","6 months experience"],benefits:["Consistent schedule","Full benefits"]},
+    {id:"otr-1",category:"OTR",title:"OTR CDL-A - 48 States",company:"Long Haul Solutions",location:"Nationwide • OTR",pay:"$0.60 - $0.72 / mile + bonuses",type:"OTR • 2-3 weeks out",description:"OTR dry van, no NY/NJ forced. 3000+ miles weekly, fuel surcharge included.",requirements:["CDL-A 1yr OTR","Clean PSP"],benefits:["$2500 sign-on","Pet & rider"]},
+    {id:"otr-2",category:"OTR",title:"OTR Team Drivers",company:"Expedited Freight LLC",location:"DFW Based • OTR Team",pay:"$2,200+ each / week",type:"OTR • Team",description:"High-value expedited freight coast to coast. Teams stay rolling, high miles.",requirements:["CDL-A Team","HazMat a plus"],benefits:["Top tier pay","New trucks 2024-25"]},
+    {id:"oo-1",category:"Owner Operator",title:"Owner Operator - Dry Van & Reefer",company:"TCB Logistics Dispatch",location:"Nationwide • Choose your lanes",pay:"88% Gross + FSC • $8k-$12k gross/wk",type:"Owner Operator",description:"Run under our authority. No forced dispatch, no trailer rent, fuel card discounts, ELD compliance support included.",requirements:["Own truck 2015+","Own authority or run under ours"],benefits:["88% gross","Free compliance help","24/7 dispatch"]},
+    {id:"oo-2",category:"Owner Operator",title:"Owner Operator Power Only",company:"Power Only Network",location:"Memphis/Tupelo/DFW",pay:"$2.80 - $3.50 / mile",type:"Owner Operator • Power Only",description:"Drop and hook power only. Preloaded trailers, no touch. Ideal for O/O wanting steady freight.",requirements:["Own tractor","Clean inspection history"],benefits:["Quick pay","Fuel advances"]}
+  ];
+
+  let jobs = load(STORAGE_JOBS, defaultJobs);
+  let activeCategory = "Local";
+  let editingId = null;
+
+  const $ = (id) => document.getElementById(id);
+
+  function load(key, fallback){
+    try{
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : fallback;
+    }catch(e){ return fallback; }
+  }
+
+  function saveJobs(){
+    localStorage.setItem(STORAGE_JOBS, JSON.stringify(jobs));
+  }
+
+  function toast(message){
+    const el = $("toast");
+    el.textContent = message;
+    el.classList.add("show");
+    clearTimeout(window.__toast);
+    window.__toast = setTimeout(() => el.classList.remove("show"), 3200);
+  }
+
+  function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[ch]));
+  }
+
+  function renderTabs(){
+    const categories = ["Local","Regional","OTR","Owner Operator"];
+    $("jobTabs").innerHTML = categories.map(c =>
+      `<button class="tab ${activeCategory===c ? "active":""}" data-category="${escapeHtml(c)}">${escapeHtml(c)}</button>`
+    ).join("");
+  }
+
+  function renderJobs(){
+    const list = jobs.filter(j => j.category === activeCategory);
+    if(!list.length){
+      $("jobsGrid").innerHTML = `<div class="job-card" style="grid-column:1/-1;min-height:auto"><strong>No opportunities are currently listed in this category.</strong><p class="job-desc">Check another category or return later for new opportunities.</p></div>`;
+      return;
+    }
+
+    $("jobsGrid").innerHTML = list.map(job => `
+      <article class="job-card">
+        <div class="job-top">
+          <span class="badge">${escapeHtml(job.type || job.category)}</span>
+          ${isAdmin() ? `<button class="admin-actions-inline" style="border:0;background:none;font-size:18px" title="Edit" data-edit="${job.id}">✎</button>` : ""}
+        </div>
+        <h3>${escapeHtml(job.title)}</h3>
+        <div class="company">${escapeHtml(job.company)}</div>
+        <div class="job-meta">
+          <span class="pill">${escapeHtml(job.pay)}</span>
+          <span class="pill gray">${escapeHtml(job.location)}</span>
+        </div>
+        <p class="job-desc">${escapeHtml(job.description)}</p>
+        <div class="chips">${(job.requirements||[]).map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join("")}</div>
+        <div class="chips" style="margin-top:7px">${(job.benefits||[]).map(x=>`<span class="chip" style="background:rgba(212,175,55,.12)">${escapeHtml(x)}</span>`).join("")}</div>
+        <div class="job-actions">
+          <button class="btn btn-dark" data-view="${job.id}">View Details</button>
+          <a class="btn btn-purple" href="mailto:admin@tcblogisticenterprises.com?subject=${encodeURIComponent("CDL Driver Interest - "+job.title)}&body=${encodeURIComponent("I am interested in the following CDL opportunity:%0A%0A"+job.title+"%0A"+job.location+"%0A"+job.pay+"%0A%0AName:%0APhone:%0AZIP Code:")}">Apply Now</a>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderAdmin(){
+    const panel = $("adminPanel");
+    if(!isAdmin()){
+      panel.classList.remove("show");
+      $("adminTable").innerHTML = "";
+      return;
+    }
+    panel.classList.add("show");
+    const appointments = load(STORAGE_APPOINTMENTS, []);
+    $("adminTable").innerHTML = `
+      <table>
+        <thead><tr><th>Job Management</th><th>Private Appointments</th><th>Date / Time</th><th>Created</th></tr></thead>
+        <tbody>
+          ${appointments.length ? appointments.map(a => `
+            <tr><td>${escapeHtml(a.name)}</td><td>${escapeHtml(a.testType)}<br>${escapeHtml(a.phone)}<br>${escapeHtml(a.email)}</td><td>${escapeHtml(a.date)} ${escapeHtml(a.time||"")}</td><td>${escapeHtml(a.created)}</td></tr>
+          `).join("") : `<tr><td colspan="4">No private appointments yet.</td></tr>`}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function isAdmin(){ return localStorage.getItem("tcb_admin") === "true"; }
+
+  function openModal(id){ $(id).classList.add("open"); document.body.classList.add("modal-open"); }
+  function closeModal(id){ $(id).classList.remove("open"); if(!document.querySelector(".modal-backdrop.open")) document.body.classList.remove("modal-open"); }
+
+  function showJob(jobId){
+    const job = jobs.find(j=>j.id===jobId);
+    if(!job) return;
+    $("jobModalContent").innerHTML = `
+      <span class="badge">${escapeHtml(job.type || job.category)}</span>
+      <h3>${escapeHtml(job.title)}</h3>
+      <div class="modal-sub"><b>${escapeHtml(job.company)}</b> • ${escapeHtml(job.location)} • ${escapeHtml(job.pay)}</div>
+      <p style="font-size:13px;line-height:1.7;color:var(--muted)">${escapeHtml(job.description)}</p>
+      <div class="form-grid" style="margin-top:20px">
+        <div><label>Requirements</label><div class="chips">${job.requirements.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join("")}</div></div>
+        <div><label>Benefits</label><div class="chips">${job.benefits.map(x=>`<span class="chip" style="background:rgba(212,175,55,.12)">${escapeHtml(x)}</span>`).join("")}</div></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" style="color:#111;border-color:var(--line)" data-close="jobModal">Close</button>
+        <a class="btn btn-purple" href="mailto:admin@tcblogisticenterprises.com?subject=${encodeURIComponent("CDL Driver Interest - "+job.title)}">Apply via Email</a>
+      </div>
+    `;
+    openModal("jobModal");
+  }
+
+  function showEditor(jobId=null){
+    editingId = jobId;
+    const job = jobId ? jobs.find(j=>j.id===jobId) : {
+      category:activeCategory,title:"",company:"",location:"",pay:"",type:"",
+      description:"",requirements:[],benefits:[]
+    };
+    if(!job) return;
+    $("jobModalContent").innerHTML = `
+      <h3>${jobId ? "Edit Job" : "Create Job Box"}</h3>
+      <div class="modal-sub">Changes are saved to localStorage for this GitHub Pages browser session.</div>
+      <form id="jobEditorForm">
+        <div class="form-grid">
+          <div><label>Category *</label><select id="editCategory">
+            ${["Local","Regional","OTR","Owner Operator"].map(c=>`<option ${job.category===c?"selected":""}>${c}</option>`).join("")}
+          </select></div>
+          <div><label>Title *</label><input id="editTitle" required value="${escapeHtml(job.title)}" placeholder="Local CDL-A Delivery Driver"></div>
+          <div><label>Company *</label><input id="editCompany" required value="${escapeHtml(job.company)}" placeholder="Fleet Name"></div>
+          <div><label>Location</label><input id="editLocation" value="${escapeHtml(job.location)}" placeholder="Dallas, TX • Home Daily"></div>
+          <div><label>Pay</label><input id="editPay" value="${escapeHtml(job.pay)}" placeholder="$1,400 - $1,800 / week"></div>
+          <div><label>Type Badge</label><input id="editType" value="${escapeHtml(job.type)}" placeholder="Local • Home Daily"></div>
+          <div class="full"><label>Description</label><textarea id="editDescription">${escapeHtml(job.description)}</textarea></div>
+          <div><label>Requirements</label><textarea id="editRequirements" placeholder="One item per line">${escapeHtml(job.requirements.join("\n"))}</textarea></div>
+          <div><label>Benefits</label><textarea id="editBenefits" placeholder="One item per line">${escapeHtml(job.benefits.join("\n"))}</textarea></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" style="color:#111;border-color:var(--line)" data-close="jobModal">Cancel</button>
+          <button class="btn btn-dark">${jobId ? "Save Changes" : "Create Job Box"}</button>
+        </div>
+      </form>
+    `;
+    $("jobEditorForm").addEventListener("submit", saveJob);
+    openModal("jobModal");
+  }
+
+  function saveJob(e){
+    e.preventDefault();
+    const data = {
+      id: editingId || ("job-"+Date.now()),
+      category:$("editCategory").value,
+      title:$("editTitle").value.trim(),
+      company:$("editCompany").value.trim(),
+      location:$("editLocation").value.trim(),
+      pay:$("editPay").value.trim(),
+      type:$("editType").value.trim(),
+      description:$("editDescription").value.trim(),
+      requirements:$("editRequirements").value.split("\n").map(x=>x.trim()).filter(Boolean),
+      benefits:$("editBenefits").value.split("\n").map(x=>x.trim()).filter(Boolean)
+    };
+    if(!data.title || !data.company){ toast("Title and company are required."); return; }
+    if(editingId) jobs = jobs.map(j=>j.id===editingId ? data : j);
+    else jobs.push(data);
+    saveJobs();
+    activeCategory = data.category;
+    renderTabs(); renderJobs(); renderAdmin(); closeModal("jobModal");
+    toast(editingId ? "Job updated." : "Job created.");
+  }
+
+  // Navigation
+  $("mobileMenu").addEventListener("click", ()=> $("navLinks").classList.toggle("open"));
+  document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", ()=> $("navLinks").classList.remove("open")));
+
+  // Job tabs and cards
+  $("jobTabs").addEventListener("click", e => {
+    const btn = e.target.closest("[data-category]");
+    if(!btn) return;
+    activeCategory = btn.dataset.category;
+    renderTabs(); renderJobs();
+  });
+  $("jobsGrid").addEventListener("click", e => {
+    const view = e.target.closest("[data-view]");
+    const edit = e.target.closest("[data-edit]");
+    if(view) showJob(view.dataset.view);
+    if(edit && isAdmin()) showEditor(edit.dataset.edit);
+  });
+
+  // Recruiter
+  $("recruiterDetailsBtn").addEventListener("click", ()=>openModal("recruiterModal"));
+
+  // Booking
+  $("bookingForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const appointments = load(STORAGE_APPOINTMENTS, []);
+    appointments.push({
+      name:$("bookName").value.trim(),
+      phone:$("bookPhone").value.trim(),
+      email:$("bookEmail").value.trim(),
+      testType:$("bookTest").value,
+      date:$("bookDate").value,
+      time:$("bookTime").value,
+      created:new Date().toLocaleString()
+    });
+    localStorage.setItem(STORAGE_APPOINTMENTS, JSON.stringify(appointments));
+    e.target.reset();
+    renderAdmin();
+    toast("Booking request saved privately in this browser.");
+  });
+
+  // Admin
+  $("adminOpen").addEventListener("click", ()=>{
+    if(isAdmin()){ renderAdmin(); document.querySelector(".admin-panel").scrollIntoView({behavior:"smooth"}); }
+    else { $("adminPassword").value=""; openModal("adminLoginModal"); setTimeout(()=>$("adminPassword").focus(),100); }
+  });
+
+  $("unlockBtn").addEventListener("click", ()=>{
+    if($("adminPassword").value === ADMIN_PASSWORD){
+      localStorage.setItem("tcb_admin","true");
+      closeModal("adminLoginModal");
+      renderAdmin(); renderJobs();
+      toast("Admin mode enabled.");
+      setTimeout(()=>document.querySelector(".admin-panel").scrollIntoView({behavior:"smooth"}),100);
+    }else toast("Incorrect password.");
+  });
+
+  $("adminPassword").addEventListener("keydown", e=>{ if(e.key==="Enter") $("unlockBtn").click(); });
+
+  $("logoutBtn").addEventListener("click", ()=>{
+    localStorage.removeItem("tcb_admin");
+    renderAdmin(); renderJobs(); toast("Admin mode disabled.");
+  });
+
+  $("addJobBtn").addEventListener("click", ()=>showEditor());
+  $("resetJobsBtn").addEventListener("click", ()=>{
+    if(!confirm("Reset all job boxes to the original defaults?")) return;
+    jobs = JSON.parse(JSON.stringify(defaultJobs));
+    saveJobs(); renderTabs(); renderJobs(); renderAdmin(); toast("Jobs reset.");
+  });
+
+  // Modal close behavior
+  document.addEventListener("click", e => {
+    const close = e.target.closest("[data-close]");
+    if(close) closeModal(close.dataset.close);
+    if(e.target.classList.contains("modal-backdrop")) closeModal(e.target.id);
+  });
+  document.addEventListener("keydown", e => {
+    if(e.key==="Escape") document.querySelectorAll(".modal-backdrop.open").forEach(m=>closeModal(m.id));
+  });
+
+  $("year").textContent = new Date().getFullYear();
+  renderTabs();
+  renderJobs();
+  renderAdmin();
+})();
+</script>
+</body>
+</html>
